@@ -96,14 +96,19 @@ td.today:hover
 .leftwindow
 {
  float:left;
- width:74%;
- height:1000px;
+ width:72%;
+ height:900px;
+ background-color:rgba(170,170,170,0.2);
+ border-radius:2px;
+ box-shadow: 8px -8px 10px #BBBBBB;
+ margin-bottom:200px;
+ background: rgb(170, 170, 170) transparent;//for browsers which doesn't support rgba() function
 }
 .rightwindow
 {
  float:right;
- width:24%;
- height:1000px;
+ width:22%;
+ height:900px;
 }
 .menus
 {
@@ -173,7 +178,7 @@ td.today:hover
 .content
 {
  width:960px;
- height:1000px;
+ height:900px;
 }
 .bottom
 {
@@ -186,11 +191,37 @@ td.today:hover
  width:960px;	
  height:25px;
  color:white;
+ font-size:18px;
  font-weight:bold;
- box-shadow: 10px 10px 5px #AAAAAA;
+ box-shadow: 5px 5px 1px #AAAAAA;
+ text-decoration:none;
 }
 body
 {
  background:url('../images/background.jpg') repeat-x;
  background-attachment:fixed;
+}
+.status a,a:visited
+{
+ color:white;
+ text-decoration:none;
+}
+.status a:hover
+{
+ font-style:italic;
+ text-decoration:underline;
+}
+.cleaner 
+{ 
+clear: both; 
+width: 960px; 
+height: 5px; 
+font-size: 0px;  
+}
+#cal_month
+{
+ font-size:20px;
+ font-family:Times New Roman;
+ color:#444444;
+ vertical-align:middle;
 }
