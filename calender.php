@@ -1,14 +1,19 @@
 <html>
 <head>
 		<title>Calender</title>
+		<script type="text/javascript" src="jquery/jquery.js"></script>
+		<script type="text/javascript" src="jquery/jquery.popupWindow.js"> </script>
 		<script  type='text/javascript'>
 			function popup(url) 
 			{
-				window.open( url, 'myWindow', 'status=1, height = 200, width=300, resizable = 1,fullscreen=0' )	
+				$('#open').popupWindow({ 
+				windowURL:url, 
+				windowName:'swip' 
+				});	
 			}
 		</script>
 </head>
-<body>
+<body background="background.jpg">
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <?php
 				
@@ -73,14 +78,14 @@
 			<div style='text-align:center;'>
 			<tr>
 			<td colspan='1'><span style='float:left;'>
-				<a href='$global[envself]?y=$last_year&m=$last_month' > <img src='images/leftarrow.png' height=30 width=30> </a><span>
+				<a href='$global[envself]?y=$last_year&m=$last_month' > <img src='leftarrow.png' height=30 width=30> </a><span>
 			</td>
 			<th colspan='5' background='calpad.jpg' > <span style='font-size:25px'>	
 			";
 			echo date('M', mktime(0,0,0,$month,1,$year)).' '.$year;  	//display current month and year
 			echo "</span> </th>
 	 		<td colspan='1'><span style='float:right;'>
-			<a href='$global[envself]?y=$next_year&m=$next_month' ><img src='images/rightarrow.png' height=30 width=30> </a></span>
+			<a href='$global[envself]?y=$next_year&m=$next_month' ><img src='rightarrow.png' height=30 width=30> </a></span>
 			</td>
 				</tr>
 			</div>
@@ -104,14 +109,14 @@
 						$rs1 = mysql_query("SELECT * FROM calender where month=$month and year=$year");
 						if(($ro = mysql_fetch_assoc($rs1))&&($week[$j][$i]==$ro['day']))	//check if current date has any details in database
 						{
-							echo "<td align='center' background='images/background.jpg'> ";	//if so, make background diffrent
-							echo "<span onClick=popup('$url') > ";
+							echo "<td align='center' background='background.jpg'> ";	//if so, make background diffrent
+							echo "<span id='open'  onClick=popup('$url') > ";
 							echo $week[$j][$i];		
 							echo " </span>";
 						}
 						else
 						{
-							echo "<td align='center' background='images/calpad.jpg'> ";
+							echo "<td align='center' background='calpad.jpg'> ";
 							echo $week[$j][$i];		
 						}
 						
