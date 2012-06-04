@@ -1,8 +1,8 @@
 <html>
 <head>
 		<title>Calender</title>
-		<script type="text/javascript" src="jquery/jquery.js"></script>
-		<script type="text/javascript" src="jquery/jquery.popupWindow.js"> </script>
+		<script type="text/javascript" src="js/jquery-1.3.min.js"></script>
+		<script type="text/javascript" src="js/coda.js"> </script>
 		<script  type='text/javascript'>
 			function popup(url) 
 			{
