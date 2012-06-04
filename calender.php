@@ -13,7 +13,7 @@
 			}
 		</script>
 </head>
-<body background="background.jpg">
+<body >
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <?php
 				
@@ -78,25 +78,25 @@
 			<div style='text-align:center;'>
 			<tr>
 			<td colspan='1'><span style='float:left;'>
-				<a href='$global[envself]?y=$last_year&m=$last_month' > <img src='leftarrow.png' height=30 width=30> </a><span>
+				<a href='$global[envself]?y=$last_year&m=$last_month' > <img src='images/leftarrow.png' height=30 width=30> </a><span>
 			</td>
 			<th colspan='5' background='calpad.jpg' > <span style='font-size:25px'>	
 			";
 			echo date('M', mktime(0,0,0,$month,1,$year)).' '.$year;  	//display current month and year
 			echo "</span> </th>
 	 		<td colspan='1'><span style='float:right;'>
-			<a href='$global[envself]?y=$next_year&m=$next_month' ><img src='rightarrow.png' height=30 width=30> </a></span>
+			<a href='$global[envself]?y=$next_year&m=$next_month' ><img src='images/rightarrow.png' height=30 width=30> </a></span>
 			</td>
 				</tr>
 			</div>
-				<tr>
-				<td align='center' background='calpad.jpg'> <b> Sun</b> </td>
-				<td align='center' background='calpad.jpg'> <b>Mon</b></td>
-				<td align='center' background='calpad.jpg'> <b>Tues</b></td>
-				<td align='center' background='calpad.jpg'> <b>Wed</b></td>
-				<td align='center' background='calpad.jpg'> <b>Thur</b></td>
-				<td align='center' background='calpad.jpg'> <b>Fri. </b></td>
-				<td align='center' background='calpad.jpg'> <b>Sat </b></td>
+				<tr align='center' background='images/calpad.jpg'>
+				<td> <b> Sun</b> </td>
+				<td> <b>Mon</b></td>
+				<td> <b>Tues</b></td>
+				<td> <b>Wed</b></td>
+				<td> <b>Thur</b></td>
+				<td> <b>Fri. </b></td>
+				<td> <b>Sat </b></td>
 				</tr>
 			";
 			for($j=0;$j<$no_of_weeks;$j++)
@@ -109,14 +109,14 @@
 						$rs1 = mysql_query("SELECT * FROM calender where month=$month and year=$year");
 						if(($ro = mysql_fetch_assoc($rs1))&&($week[$j][$i]==$ro['day']))	//check if current date has any details in database
 						{
-							echo "<td align='center' background='background.jpg'> ";	//if so, make background diffrent
+							echo "<td align='center' background='images/background.jpg'> ";	//if so, make background diffrent
 							echo "<span id='open'  onClick=popup('$url') > ";
 							echo $week[$j][$i];		
 							echo " </span>";
 						}
 						else
 						{
-							echo "<td align='center' background='calpad.jpg'> ";
+							echo "<td align='center' background='images/calpad.jpg'> ";
 							echo $week[$j][$i];		
 						}
 						
