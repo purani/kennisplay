@@ -1,64 +1,62 @@
-$(function () {
-	$('.date_has_event').each(function () {
-		// options
-		var distance = 10;
-		var time = 250;
-		var hideDelay = 500;
+(function($){ 		  
+	$.fn.popupWindow = function(instanceSettings){
+		
+		return this.each(function(){
+		
+		$(this).click(function(){
+		
+		$.fn.popupWindow.defaultSettings = {
+			centerBrowser:0, // center window over browser window? {1 (YES) or 0 (NO)}. overrides top and left
+			centerScreen:0, // center window over entire screen? {1 (YES) or 0 (NO)}. overrides top and left
+			height:500, // sets the height in pixels of the window.
+			left:0, // left position when the window appears.
+			location:0, // determines whether the address bar is displayed {1 (YES) or 0 (NO)}.
+			menubar:0, // determines whether the menu bar is displayed {1 (YES) or 0 (NO)}.
+			resizable:0, // whether the window can be resized {1 (YES) or 0 (NO)}. Can also be overloaded using resizable.
+			scrollbars:0, // determines whether scrollbars appear on the window {1 (YES) or 0 (NO)}.
+			status:0, // whether a status line appears at the bottom of the window {1 (YES) or 0 (NO)}.
+			width:500, // sets the width in pixels of the window.
+			windowName:null, // name of window set from the name attribute of the element that invokes the click
+			windowURL:null, // url used for the popup
+			top:0, // top position when the window appears.
+			toolbar:0 // determines whether a toolbar (includes the forward and back buttons) is displayed {1 (YES) or 0 (NO)}.
+		};
+		
+		settings = $.extend({}, $.fn.popupWindow.defaultSettings, instanceSettings || {});
+		
+		var windowFeatures =    'height=' + settings.height +
+								',width=' + settings.width +
+								',toolbar=' + settings.toolbar +
+								',scrollbars=' + settings.scrollbars +
+								',status=' + settings.status + 
+								',resizable=' + settings.resizable +
+								',location=' + settings.location +
+								',menuBar=' + settings.menubar;
 
-		var hideDelayTimer = null;
-
-		// tracker
-		var beingShown = false;
-		var shown = false;
-
-		var trigger = $(this);
-		var popup = $('.events ul', this).css('opacity', 0);
-
-		// set the mouseover and mouseout on both element
-		$([trigger.get(0), popup.get(0)]).mouseover(function () {
-			// stops the hide event if we move from the trigger to the popup element
-			if (hideDelayTimer) clearTimeout(hideDelayTimer);
-
-			// don't trigger the animation again if we're being shown, or already visible
-			if (beingShown || shown) {
-				return;
-			} else {
-				beingShown = true;
-
-				// reset position of popup box
-				popup.css({
-					bottom: 20,
-					left: -76,
-					display: 'block' // brings the popup back in to view
-				})
-
-				// (we're using chaining on the popup) now animate it's opacity and position
-				.animate({
-					bottom: '+=' + distance + 'px',
-					opacity: 1
-				}, time, 'swing', function() {
-					// once the animation is complete, set the tracker variables
-					beingShown = false;
-					shown = true;
-				});
-			}
-		}).mouseout(function () {
-			// reset the timer if we get fired again - avoids double animations
-			if (hideDelayTimer) clearTimeout(hideDelayTimer);
-
-			// store the timer so that it can be cleared in the mouseover if required
-			hideDelayTimer = setTimeout(function () {
-				hideDelayTimer = null;
-				popup.animate({
-					bottom: '-=' + distance + 'px',
-					opacity: 0
-				}, time, 'swing', function () {
-					// once the animate is complete, set the tracker variables
-					shown = false;
-					// hide the popup entirely after the effect (opacity alone doesn't do the job)
-					popup.css('display', 'none');
-				});
-			}, hideDelay);
-		});
-	});
-});
+				settings.windowName = this.name || settings.windowName;
+				settings.windowURL = this.href || settings.windowURL;
+				var centeredY,centeredX;
+			
+				if(settings.centerBrowser){
+						
+					if ($.browser.msie) {//hacked together for IE browsers
+						centeredY = (window.screenTop - 120) + ((((document.documentElement.clientHeight + 120)/2) - (settings.height/2)));
+						centeredX = window.screenLeft + ((((document.body.offsetWidth + 20)/2) - (settings.width/2)));
+					}else{
+						centeredY = window.screenY + (((window.outerHeight/2) - (settings.height/2)));
+						centeredX = window.screenX + (((window.outerWidth/2) - (settings.width/2)));
+					}
+					window.open(settings.windowURL, settings.windowName, windowFeatures+',left=' + centeredX +',top=' + centeredY).focus();
+				}else if(settings.centerScreen){
+					centeredY = (screen.height - settings.height)/2;
+					centeredX = (screen.width - settings.width)/2;
+					window.open(settings.windowURL, settings.windowName, windowFeatures+',left=' + centeredX +',top=' + centeredY).focus();
+				}else{
+					window.open(settings.windowURL, settings.windowName, windowFeatures+',left=' + settings.left +',top=' + settings.top).focus();	
+				}
+				return false;
+			});
+			
+		});	
+	};
+})(jQuery);
