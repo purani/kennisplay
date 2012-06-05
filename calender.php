@@ -1,14 +1,19 @@
 <html>
 <head>
 		<title>Calender</title>
+		<script type="text/javascript" src="js/jquery-1.3.min.js"></script>
+		<script type="text/javascript" src="js/coda.js"> </script>
 		<script  type='text/javascript'>
 			function popup(url) 
 			{
-				window.open( url, 'myWindow', 'status=1, height = 200, width=300, resizable = 1,fullscreen=0' )	
+				$('#open').popupWindow({ 
+				windowURL:url, 
+				windowName:'swip' 
+				});	
 			}
 		</script>
 </head>
-<body>
+<body >
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <?php
 				
@@ -84,14 +89,14 @@
 			</td>
 				</tr>
 			</div>
-				<tr>
-				<td align='center' background='calpad.jpg'> <b> Sun</b> </td>
-				<td align='center' background='calpad.jpg'> <b>Mon</b></td>
-				<td align='center' background='calpad.jpg'> <b>Tues</b></td>
-				<td align='center' background='calpad.jpg'> <b>Wed</b></td>
-				<td align='center' background='calpad.jpg'> <b>Thur</b></td>
-				<td align='center' background='calpad.jpg'> <b>Fri. </b></td>
-				<td align='center' background='calpad.jpg'> <b>Sat </b></td>
+				<tr align='center' background='images/calpad.jpg'>
+				<td> <b> Sun</b> </td>
+				<td> <b>Mon</b></td>
+				<td> <b>Tues</b></td>
+				<td> <b>Wed</b></td>
+				<td> <b>Thur</b></td>
+				<td> <b>Fri. </b></td>
+				<td> <b>Sat </b></td>
 				</tr>
 			";
 			for($j=0;$j<$no_of_weeks;$j++)
@@ -105,7 +110,7 @@
 						if(($ro = mysql_fetch_assoc($rs1))&&($week[$j][$i]==$ro['day']))	//check if current date has any details in database
 						{
 							echo "<td align='center' background='images/background.jpg'> ";	//if so, make background diffrent
-							echo "<span onClick=popup('$url') > ";
+							echo "<span id='open'  onClick=popup('$url') > ";
 							echo $week[$j][$i];		
 							echo " </span>";
 						}
