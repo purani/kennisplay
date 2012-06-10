@@ -1,8 +1,3 @@
-<html>
-<head>
-		<title>Calender</title>
-		<script type="text/javascript" src="js/jquery-1.3.min.js"></script>
-		<script type="text/javascript" src="js/coda.js"> </script>
 		<script  type='text/javascript'>
 			function popup(url) 
 			{
@@ -12,9 +7,6 @@
 				});	
 			}
 		</script>
-</head>
-<body >
-<link rel="stylesheet" href="css/style.css" type="text/css">
 <?php
 				
 		$calendar = getCalendar($month,$year);
@@ -106,7 +98,7 @@
 					for($i=0;$i<7;$i++)
 					{	
 						$url="http://localhost/details.php?yr=".$year."&dat=".$week[$j][$i]."&mn=".$month;		
-						$rs1 = mysql_query("SELECT * FROM calender where month=$month and year=$year");
+						$rs1 = mysql_query("SELECT * FROM symposium where month=$month and year=$year");
 						if(($ro = mysql_fetch_assoc($rs1))&&($week[$j][$i]==$ro['day']))	//check if current date has any details in database
 						{
 							echo "<td align='center' background='images/background.jpg'> ";	//if so, make background diffrent
@@ -127,5 +119,3 @@
 		}
 ?>
 <div id="calendar_wrapper"><?PHP echo @$calendar ?></div>		<!-- call calender function -->
-</body>
-</html>
