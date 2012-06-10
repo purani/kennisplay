@@ -1,8 +1,4 @@
-<html>
-<head>
-		<title>Calender</title>
-		<script type="text/javascript" src="js/jquery-1.3.min.js"></script>
-		<script type="text/javascript" src="js/coda.js"> </script>
+		<script type="text/javascript" src="js/jquery.popupWindow.js"> </script>
 		<script  type='text/javascript'>
 			function popup(url) 
 			{
@@ -12,8 +8,6 @@
 				});	
 			}
 		</script>
-</head>
-<body >
 <link rel="stylesheet" href="css/style.css" type="text/css">
 <?php
 				
@@ -127,5 +121,3 @@
 		}
 ?>
 <div id="calendar_wrapper"><?PHP echo @$calendar ?></div>		<!-- call calender function -->
-</body>
-</html>
